@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/usr/share/vim/vim73'
+let g:netrw_dirhist_2='/Users/dan/data/projects/open_source/kivy/kivy/core/window'
+let g:netrw_dirhist_3='/sw/etc/profile.d'
+let g:netrw_dirhist_4='/Users/dan/.ssh'
+let g:netrw_dirhist_5='/Users/d.ashbrook/data/projects/coffee/tut1/public/css'
+let g:netrw_dirhist_6='/Users/d.ashbrook/.dotfiles/.vim/ftplugin/html'
+let g:netrw_dirhist_7='/Users/d.ashbrook/data/projects/samsung/galaxy gear/SM-V700_JB_Opensource_Update2/platform/build'
+let g:netrw_dirhist_8='/Users/d.ashbrook/data/projects/samsung/ble/noble/test'
+let g:netrw_dirhist_9='/Users/d.ashbrook/data/python/wx'

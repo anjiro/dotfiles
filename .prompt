@@ -1,0 +1,5 @@
+export HOSTNAME=`uname -n | sed 's-\..*$--g'`
+#export HOSTNAME='gluon'
+#export PS1="[33m$HOSTNAME:\${PWD#\$HOME/}\$SCOLOR>[0m"
+export PS1="$HOSTNAME:\${PWD#\$HOME/}\$SCOLOR>"
+#export COLUMNS=80

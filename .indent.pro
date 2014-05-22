@@ -1,0 +1,20 @@
+-bap			//Force blank lines after procedure bodies.
+-bl				//Put braces on line after if, etc.
+-bli0			//Indent braces 0 spaces.
+-blf			//Put braces on line following function definition line.
+-bls			//Put braces on the line after struct declaration lines.
+-i2				//Set indentation level to 2 spaces.
+-lp				//Line up continued lines at parentheses.
+-nprs			//Do not put a space after every '(' and before every ')'.
+-nsaf			//Do not put a space after every for.
+-nsai			//Do not put a space after every if.
+-nsaw			//Do not put a space after every while.
+-nbbo			//Do not prefer to break long lines before boolean operators.
+-npcs			//Do not put space after the function in function calls.
+-npsl			//Put the type of a procedure on the same line as its name.
+-cli2			//Case label indent of 2 spaces.
+-cbi0			//Indent braces after a case label 0 spaces.
+-cs				//Put a space after a cast operator.
+-nbc			//Do not force newlines after commas in declarations.
+-ci2			//Continuation indent of 2 spaces.
+-ts2			//Set tab size to 2 spaces.
