@@ -18,6 +18,12 @@ Plugin 'aklt/plantuml-syntax'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/Align'
 Plugin 'tpope/vim-surround'
+Plugin 'othree/html5.vim'
+Plugin 'JavaScript-Indent'
+Plugin 'tpope/vim-repeat'
+Plugin 'groenewege/vim-less'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-ragtag'
 
 call vundle#end()
 filetype plugin indent on
@@ -76,9 +82,10 @@ autocmd FileType python setlocal shiftwidth=2 tabstop=2
 "Allow reasonable backspace
 set backspace=indent,eol,start
 
-"Make +/- resize window
-map + <C-W>+
-map = <C-W>-
+"Make +/= resize window
+" Disabled as = to reindent is too handy!
+"map + <C-W>+
+"map = <C-W>-
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.

@@ -80,3 +80,6 @@ fu! s:HighlightTagAtPosition(position)
                 \ .'\(\%' . line('.') . 'l<\zs[^<>]\{-}\ze\s[^<>]*\%' . col('.') . 'c.\{-}>\)/'
     let w:tag_hl_on = 1
 endfu
+
+"Add dash to keywords
+setlocal iskeyword+=-
