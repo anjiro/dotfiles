@@ -24,6 +24,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'groenewege/vim-less'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-ragtag'
+Plugin 'digitaltoad/vim-jade'
 
 call vundle#end()
 filetype plugin indent on
@@ -35,6 +36,7 @@ set tabstop=2
 set shiftwidth=2
 set smarttab
 set nowrap
+set mouse=a
 
 set ff=unix           "Automatically deal with dos files
 
@@ -164,7 +166,11 @@ noremap f t
 let NERDDefaultAlign='start'
 let NERDRemoveExtraSpaces=0
 let NERD_c_alt_style=1  "Use // instead of /* */ for c code
-noremap T :call NERDComment('n', 'norm')<CR>j
+let g:NERDCustomDelimiters = {
+	\ 'plaintex': { 'left': '%' },
+	\ 'tex':      { 'left': '%' }
+\ }
+noremap T :call NERDComment('n', 'sexy')<CR>j
 noremap t :call NERDComment('n', 'uncomment')<CR>j
 
 "Make :e work with mulitple files by replacing it with :args
