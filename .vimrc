@@ -41,6 +41,7 @@ set mouse=a
 set ff=unix           "Automatically deal with dos files
 
 colorscheme dancolors
+
 if has('gui_running')
 	set guifont=Monaco:h12
 	set guioptions-=T   "remove toolbar from gui
