@@ -6,7 +6,7 @@ set -o vi
 . ~/.alias
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/ccache/3.1.7/libexec:/usr/local/share/npm/bin:$PATH
-export PATH=$PATH:/Applications/Android_SDK/sdk/platform-tools 
+export PATH=$PATH:/Applications/android-sdk-macosx/tools
 export EDITOR=vi
 
 case "$OSTYPE" in darwin*)
@@ -32,9 +32,14 @@ shopt -s extglob  #allow negative ls: ls !(*.pyc)
 
 export PAGER="less -XR"  #prevent screen clear after exit, keep colors
 
-export PERL5LIB=$PERL5LIB:$HOME/data/perl/tk:$HOME/data/perl
 export LANG=C
+
+#Application-specific exports
+export PERL5LIB=$PERL5LIB:$HOME/data/perl/tk:$HOME/data/perl
 export PYTHONPATH=$HOME/data/python/modules:$PYTHONPATH:/usr/local/lib/python2.7/site-packages
+export NODE_PATH=/usr/local/lib/node_modules
+export ANDROID_HOME=/Applications/android-sdk-macosx
+alias adb="$ANDROID_HOME/platform-tools/adb"
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='33'

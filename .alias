@@ -23,3 +23,5 @@ alias easy_install="sudo -E easy_install"
 alias multidownload="aria2c --continue=true --connect-timeout=5 --lowest-speed-limit=400K -m2 -s8 -t10 --uri-selector=adaptive --http-accept-gzip=true --summary-interval=0 -i "
 alias indent="gindent"
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+alias grep='egrep'
+alias sed='sed -E'
