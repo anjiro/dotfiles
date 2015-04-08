@@ -14,8 +14,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 "Plugin 'vim-scripts/UltiSnips'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'aklt/plantuml-syntax'
-Plugin 'kchmck/vim-coffee-script'
+"Plugin 'aklt/plantuml-syntax'
+"Plugin 'kchmck/vim-coffee-script'
 "Plugin 'vim-scripts/Align'
 Plugin 'tpope/vim-surround'
 Plugin 'othree/html5.vim'
@@ -42,6 +42,9 @@ filetype plugin indent on
 
 "Set F11 to show the yank ring
 "nnoremap <silent> <F11> :YRShow<CR>
+
+"Make gf edit the file under the cursor even if it doesn't exist
+map gf :e <cfile><CR>
 
 set laststatus=2
 set tabstop=2
@@ -104,6 +107,7 @@ set wrapmargin=8
 
 "Ensure indentation for python
 autocmd FileType python setlocal shiftwidth=2 tabstop=2
+autocmd FileType pyrex  setlocal shiftwidth=2 tabstop=2
 
 "Allow reasonable backspace
 set backspace=indent,eol,start
