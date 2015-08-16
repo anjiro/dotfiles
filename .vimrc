@@ -34,6 +34,9 @@ Plugin 'zirrostig/vim-smart-swap'
 "Plugin 'scrooloose/syntastic'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'vim-scripts/visualrepeat'
+Plugin 'nathanaelkane/vim-indent-guides.git'
+"Plugin 'christoomey/vim-titlecase'
+Plugin 'vim-scripts/VisIncr'
 
 call vundle#end()
 filetype plugin indent on
