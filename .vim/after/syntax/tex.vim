@@ -5,3 +5,10 @@ hi Folded cterm=NONE ctermfg=12 ctermbg=0
 setlocal iskeyword+=\:
 setlocal iskeyword+=\_
 
+"Make vim spellcheck work everywhere?
+syntax spell toplevel
+
+"Highlight multi-line comments
+syn region texComment start="\\begin{comment}" end="\\end{comment}"
+syn region texComment start="\\iffalse"        end="\\fi"
+syn region texComment start="\\ifx true false" end="\\fi"
