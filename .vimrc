@@ -8,46 +8,62 @@
 set nocompatible
 filetype on    "turn on for osx stock vim bug
 filetype off   "turn off for vundle
+set shell=/bin/bash
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-"Plugin 'vim-scripts/UltiSnips'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ervandew/supertab'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'aklt/plantuml-syntax'
-"Plugin 'kchmck/vim-coffee-script'
-"Plugin 'vim-scripts/Align'
 Plugin 'tpope/vim-surround'
 Plugin 'othree/html5.vim'
-"Plugin 'JavaScript-Indent'
 Plugin 'tpope/vim-repeat'
 Plugin 'groenewege/vim-less'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-ragtag'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'pangloss/vim-javascript'
-"Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
-"Plugin 'kshenoy/vim-signature'
-"Plugin 'vim-scripts/YankRing.vim'
 Plugin 'choffee/openscad.vim'
 Plugin 'zirrostig/vim-smart-swap'
-"Plugin 'scrooloose/syntastic'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'vim-scripts/visualrepeat'
 Plugin 'nathanaelkane/vim-indent-guides.git'
-"Plugin 'christoomey/vim-titlecase'
 Plugin 'vim-scripts/VisIncr'
-
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'sjl/gundo.vim'
+Plugin 'vim-scripts/ingo-library'
+Plugin 'gregjurman/vim-nc'
+Plugin 'vim-scripts/closeb'
+Plugin 'justinmk/vim-ipmotion'
+"Forked from jiagmiao but only activates with whitespace to right
+Plugin 'optroot/auto-pairs.git'
 call vundle#end()
 filetype plugin indent on
 "to ignore plugin indent changes, instead use:
 "filtype plugin on
+
+let g:AutoPairsOnlyBeforeClose=1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"256 colors
+set t_Co=256
+
+nnoremap <F5> :GundoToggle<CR>
 
 "Set F11 to show the yank ring
 "nnoremap <silent> <F11> :YRShow<CR>
 
 "Make gf edit the file under the cursor even if it doesn't exist
 map gf :e <cfile><CR>
+
+set tags=./tags;/  "Search parent directories for .tags files
 
 set laststatus=2
 set tabstop=2
@@ -58,6 +74,8 @@ set mouse=a
 set textwidth=70  "Wrap properly with any number of columns
 
 set ff=unix           "Automatically deal with dos files
+
+set cursorcolumn  "Highlight column of cursor
 
 "Fix mouse issues with wider iTerm2s
 if has('mouse_sgr')
@@ -70,6 +88,17 @@ syntax on
 "let g:solarized_termcolors = 16
 set background=dark
 colorscheme solarized
+function! ToggleSolarizedFunc()
+	if &background == "dark"
+		execute "!echo -ne '\033]50;SetProfile=Solarized light\a'"
+		set background=light
+	else
+		execute "!echo -ne '\033]50;SetProfile=Solarized dark default\a'"
+		set background=light
+	endif
+endfunction
+command! ToggleSolarized call ToggleSolarizedFunc()
+nnoremap <F12> :ToggleSolarized<CR>
 
 if has('gui_running')
 	set guifont=Monaco:h12
@@ -149,6 +178,8 @@ let g:platuml_executable_script="plantuml"
 
 "vile compatibility stuff
 "------------------------
+noremap  <C-G> g<C-G>
+vnoremap <C-G> g<C-G>
 
 "Vile-esque status line
 function! Insertmode(mode)
@@ -179,13 +210,19 @@ map <C-P> :bprevious<CR>
 
 "Multiple window behavior compatibility
 "make tab go between windows
-map <C-I> <C-W><C-W>
+nnoremap <C-I> <C-W><C-W>
 "make v and V change window size - not doing due to overwriting visual mode
 "map v <C-W>-
 "map V <C-W>+
 "Make ^K kill the current window, ^O make the only window
-map <C-K> <C-W>c
-map <C-O> <C-W>o
+"map <C-K> <C-W>c
+nnoremap <C-O> <C-W>o
+
+"Map ctrl-movement keys to navigating between windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 "Show and switch to buffer
 map _ :buffers<CR>:buffer<Space>
@@ -201,7 +238,7 @@ let g:NERDCustomDelimiters = {
 	\ 'plaintex': { 'left': '%' },
 	\ 'tex':      { 'left': '%' }
 \ }
-noremap T :call NERDComment('n', 'sexy')<CR>j
+noremap T :call NERDComment('n', 'comment')<CR>j
 noremap t :call NERDComment('n', 'uncomment')<CR>j
 
 "Make :e work with mulitple files by replacing it with :args
@@ -266,10 +303,14 @@ function! Underline()
 endfunction
 map - :call Underline()<CR>
 
+"Fold latex
+let g:tex_fold_enabled=1
+autocmd FileType tex setlocal fdm=syntax
+autocmd FileType tex setlocal spell
 
 "Vim-latex settings
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
+"set grepprg=grep\ -nH\ $*
+"let g:tex_flavor='latex'
 
 "Use ctrl-right and ctrl-left to expand and split window and undo this;
 " make sure iTerm2 profile under Window tab allows session-initiated window
@@ -317,3 +358,23 @@ noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set colu
 vmap <Enter> <Plug>(EasyAlign)
 "Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+"Don't close any folds on opening a file
+set foldlevelstart=99
+
+"Preview docstring in Python folds, but don't fold them
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_docstring = 0
+
+"Line wrapping for long lines
+function! WrapFunc()
+	setl wrap linebreak bri
+	map <buffer> j gj
+	map <buffer> k gk
+	map <buffer> $ g$
+	map <buffer> ^ g^
+	map <buffer> 0 g^
+endfunction
+command! Wrap call WrapFunc()
+
+let g:airline_powerline_fonts = 1
