@@ -4,6 +4,13 @@
 " :PluginSearch(!) foo - search (or refresh cache first) for foo
 " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
 "
+
+"Bypass python3 vim bug:
+" https://github.com/vim/vim/issues/3117#issuecomment-402622616
+if has('python3')
+	silent! python3 1
+endif
+
 " see :h vundle for more details or wiki for FAQ
 set nocompatible
 filetype on    "turn on for osx stock vim bug
@@ -43,10 +50,18 @@ Plugin 'vim-scripts/closeb'
 Plugin 'justinmk/vim-ipmotion'
 "Forked from jiagmiao but only activates with whitespace to right
 Plugin 'optroot/auto-pairs.git'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'Konfekt/FastFold'
+"Plugin 'lervag/vimtex'
+"Plugin 'jeetsukumaran/vim-markology'
+
 call vundle#end()
 filetype plugin indent on
 "to ignore plugin indent changes, instead use:
 "filtype plugin on
+
+"fix vim-bookmarks stealing ma
+let g:bookmark_no_default_key_mappings = 1
 
 let g:AutoPairsOnlyBeforeClose=1
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -57,8 +72,25 @@ set t_Co=256
 
 nnoremap <F5> :GundoToggle<CR>
 
+"Make scrolling with the mouse wheel go by single lines
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
 "Set F11 to show the yank ring
 "nnoremap <silent> <F11> :YRShow<CR>
+
+"Speed up tex syntax highlighting by using an older regular expression
+"engine.
+"set re=1 
+
+"Turn on relative numbers with the current line number on the current
+"line
+set number relativenumber
+"Use only 2 columns (+1) for :set relativenumber
+set numberwidth=2
+
+"Always recognize .tex files as latex
+let g:tex_flavor = "latex"
 
 "Make gf edit the file under the cursor even if it doesn't exist
 map gf :e <cfile><CR>
@@ -72,6 +104,7 @@ set smarttab
 set nowrap
 set mouse=a
 set textwidth=70  "Wrap properly with any number of columns
+set nojoinspaces  "Prevent J from adding 2 spaces after a period
 
 set ff=unix           "Automatically deal with dos files
 
@@ -128,8 +161,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
-"disable auto-insertion of comments on newline after comment line
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"disable auto-insertion of comments on newline after pressing return
+" or o on a comment line; remove comment leader when joining lines
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o formatoptions+=j
 
 "Indenting
 set autoindent
@@ -138,8 +172,11 @@ set shiftwidth=2
 set wrapmargin=8
 
 "Ensure indentation for python
-autocmd FileType python setlocal shiftwidth=2 tabstop=2
-autocmd FileType pyrex  setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType pyrex  setlocal shiftwidth=2 tabstop=2 noexpandtab
+
+"My style of comments for python
+autocmd FileType python setlocal comments-=b:# comments+=s:#,mb:#,eb:#
 
 "Allow reasonable backspace
 set backspace=indent,eol,start
@@ -208,6 +245,10 @@ map Q :q<CR>
 map <C-N> :bnext<CR>
 map <C-P> :bprevious<CR>
 
+"Make ^E go to the end of the line in insert mode
+imap <C-E> <ESC>$A
+
+
 "Multiple window behavior compatibility
 "make tab go between windows
 nnoremap <C-I> <C-W><C-W>
@@ -216,7 +257,7 @@ nnoremap <C-I> <C-W><C-W>
 "map V <C-W>+
 "Make ^K kill the current window, ^O make the only window
 "map <C-K> <C-W>c
-nnoremap <C-O> <C-W>o
+"nnoremap <C-O> <C-W>o
 
 "Map ctrl-movement keys to navigating between windows
 nnoremap <C-J> <C-W><C-J>
@@ -224,11 +265,12 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+
 "Show and switch to buffer
 map _ :buffers<CR>:buffer<Space>
 
 "Change f to t
-noremap f t
+"noremap f t
 
 "Commenting with T and t
 let NERDDefaultAlign='start'
@@ -238,8 +280,9 @@ let g:NERDCustomDelimiters = {
 	\ 'plaintex': { 'left': '%' },
 	\ 'tex':      { 'left': '%' }
 \ }
-noremap T :call NERDComment('n', 'comment')<CR>j
-noremap t :call NERDComment('n', 'uncomment')<CR>j
+"Use \cl instead
+"noremap T :call NERDComment('n', 'comment')<CR>j
+"noremap t :call NERDComment('n', 'uncomment')<CR>j
 
 "Make :e work with mulitple files by replacing it with :args
 cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'ar' : 'e'
@@ -343,6 +386,10 @@ map <C-Left> :SizeDown<CR>
 " Source: http://superuser.com/a/244031/24583
 noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set columns=160<CR>:bo vs<CR>zRLjzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
+"Press \w to search for the current word in the other window
+" Source: http://vim.wikia.com/wiki/Search_for_current_word_in_new_window
+nnoremap <Leader>w :let @/=expand("<cword>")<Bar>wincmd w<Bar>normal n<CR>
+
 "Syntastic recommended settings
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -378,3 +425,15 @@ endfunction
 command! Wrap call WrapFunc()
 
 let g:airline_powerline_fonts = 1
+
+"Convert rich text on the clipboard to Markdown
+command PasteMarkdown :read !if encoded=`osascript -e 'the clipboard as «class HTML»'` 2>/dev/null; then echo $encoded | perl -ne 'print chr foreach unpack("C*",pack("H*",substr($_,11,-3)))' | pandoc --wrap=none -f HTML -t markdown; else pbpaste; fi
+nnoremap ,pmd :PasteMarkdown<CR>
+
+function! PythonSpaces()
+	set expandtab
+	set tabstop=4
+	set shiftwidth=4
+	set softtabstop=4
+endfunction
+command! PySpace call PythonSpaces()
