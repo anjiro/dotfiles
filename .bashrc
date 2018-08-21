@@ -6,14 +6,13 @@ set -o vi
 . ~/.alias
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/ccache/3.1.7/libexec:/usr/local/share/npm/bin:$PATH
-export PATH=$PATH:/Applications/android-sdk-macosx/tools
-export EDITOR=vi
+export EDITOR=/usr/local/bin/vim
 
 case "$OSTYPE" in darwin*)
 	export PATH=$PATH:/usr/texbin
-	if [ -f `brew --prefix`/etc/bash_completion ]; then
-		. `brew --prefix`/etc/bash_completion
-	fi
+  if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+    . $(brew --prefix)/share/bash-completion/bash_completion
+  fi
 	;;
 esac
 
@@ -32,22 +31,20 @@ shopt -s extglob  #allow negative ls: ls !(*.pyc)
 
 export PAGER="less -XR"  #prevent screen clear after exit, keep colors
 
-export LANG=C
+#export LANG=C
 
 #Application-specific exports
 export PERL5LIB=$PERL5LIB:$HOME/data/perl/tk:$HOME/data/perl
-export PYTHONPATH=$HOME/data/python/modules:$PYTHONPATH:/usr/local/lib/python2.7/site-packages
+export PYTHONPATH=$HOME/data/python/modules:$PYTHONPATH
 export NODE_PATH=/usr/local/lib/node_modules
 export ANDROID_HOME=/Applications/android-sdk-macosx
-alias adb="$ANDROID_HOME/platform-tools/adb"
+export ANDROID_NDK_ROOT=/Applications/android-sdk-macosx/android-ndk-r10d
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='33'
 
-export PATH="/Applications/microchip/xc8/v1.20/bin":$PATH
-export PATH=$HOME/data/projects/pebble/PebbleSDK-current/bin:$PATH
+export PYOPENCL_CTX=':1'
 
-
-#Prevent pip errors
-export CFLAGS=-Qunused-arguments
-export CPPFLAGS=-Qunused-arguments
+export NVM_DIR="/Users/dlaics/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source /usr/local/etc/bash_completion.d/po

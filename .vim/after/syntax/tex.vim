@@ -1,4 +1,5 @@
 hi Folded cterm=NONE ctermfg=12 ctermbg=0
+hi texRefZone cterm=NONE ctermfg=4 ctermbg=None
 
 "Make <C-N>/<C-P> autocomplete with colons and underscores
 " (e.g. sect:foo_and_bar)

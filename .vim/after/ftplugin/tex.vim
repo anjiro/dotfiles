@@ -13,3 +13,11 @@ function! TexJump2Section( cnt, dir )
 "Ignore certain filenames in completion (comma-separated)
 setlocal wildignore=*.aux,*.log,*.make,*.bbl,*.blg,*.d,*.fls,*.out,*.pdf,*.temp
 
+"Make ctrl-b and -i bold and italicize the selection, and ` put the
+"selection into quotes.
+vmap <C-B> c\textbf{}<ESC>Pf}l"
+vmap <C-I> c\textit{}<ESC>Pf}l"
+vmap ` c`'<ESC>hPW
+
+"Don't spell check in comments
+let g:tex_comment_nospell=1

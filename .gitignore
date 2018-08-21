@@ -1,2 +1,4 @@
 *.swp
 .ipython/profile_default/history.sqlite
+.vim/swap
+.vim/bundle

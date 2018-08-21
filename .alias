@@ -14,7 +14,7 @@ alias r="fc -e -"
 alias rsync="rsync -P -avh"
 alias scp="scp -C"
 alias top="top -o cpu"
-alias vi="vim"
+alias vi="TERM=xterm-256color-italic vim"
 alias whence="which"
 alias less="less -XR"
 alias pygrep="ack --python --type-add python=.pyx"
@@ -22,6 +22,14 @@ alias xls='ls -d !(*.pyc)'
 alias easy_install="sudo -E easy_install"
 alias multidownload="aria2c --continue=true --connect-timeout=5 --lowest-speed-limit=400K -m2 -s8 -t10 --uri-selector=adaptive --http-accept-gzip=true --summary-interval=0 -i "
 alias indent="gindent"
-alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+#This now shuts down all programs
+#alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 alias grep='egrep'
-alias sed='sed -E'
+alias sed='gsed'
+alias repl='echo "To reload use module = require.reload(module)"; node $HOME/data/node/modules/reload_repl.js'
+alias ssh="TERM=xterm-256color ssh"
+alias pbhi="pbpaste | highlight -O rtf -t 2 -K 40 -k 'Consolas' --style fetlab --syntax js | pbcopy"
+alias itbig="gecho -e '\033]50;SetProfile=Bigger font\a'"
+alias itsmall="gecho -e '\033]50;SetProfile=Solarized dark default\a'"
+function d2e () { trans da:en "$*"; }
+function e2d () { trans en:da "$*"; }
