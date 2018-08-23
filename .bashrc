@@ -5,7 +5,7 @@ set -o vi
 . ~/.prompt
 . ~/.alias
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/ccache/3.1.7/libexec:/usr/local/share/npm/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/python/libexec/bin:$PATH
 export EDITOR=/usr/local/bin/vim
 
 case "$OSTYPE" in darwin*)
@@ -47,4 +47,3 @@ export PYOPENCL_CTX=':1'
 
 export NVM_DIR="/Users/dlaics/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-source /usr/local/etc/bash_completion.d/po
