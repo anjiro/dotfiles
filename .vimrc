@@ -1,9 +1,5 @@
-"Vundle
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
+"Note on new install need to follow
+" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
 
 "Bypass python3 vim bug:
 " https://github.com/vim/vim/issues/3117#issuecomment-402622616
@@ -11,62 +7,79 @@ if has('python3')
 	silent! python3 1
 endif
 
+"don't allow python recommended settings
+let g:python_recommended_style=0
+
 " see :h vundle for more details or wiki for FAQ
 set nocompatible
 filetype on    "turn on for osx stock vim bug
 filetype off   "turn off for vundle
 set shell=/bin/bash
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'othree/html5.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'groenewege/vim-less'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-ragtag'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'pangloss/vim-javascript'
-Plugin 'choffee/openscad.vim'
-Plugin 'zirrostig/vim-smart-swap'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'vim-scripts/visualrepeat'
-Plugin 'nathanaelkane/vim-indent-guides.git'
-Plugin 'vim-scripts/VisIncr'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'einars/js-beautify'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'sjl/gundo.vim'
-Plugin 'vim-scripts/ingo-library'
-Plugin 'gregjurman/vim-nc'
-Plugin 'vim-scripts/closeb'
-Plugin 'justinmk/vim-ipmotion'
+call plug#begin('~/.vim/bundle')
+Plug 'ervandew/supertab'
+"Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'othree/html5.vim'
+Plug 'tpope/vim-repeat'
+Plug 'groenewege/vim-less'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-ragtag'
+Plug 'digitaltoad/vim-jade'
+Plug 'pangloss/vim-javascript'
+Plug 'choffee/openscad.vim'
+Plug 'zirrostig/vim-smart-swap'
+Plug 'junegunn/vim-easy-align'
+Plug 'vim-scripts/visualrepeat'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-scripts/VisIncr'
+Plug 'tmhedberg/SimpylFold'
+Plug 'maksimr/vim-jsbeautify'
+"Plug 'einars/js-beautify'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'sjl/gundo.vim'
+Plug 'vim-scripts/ingo-library'
+Plug 'gregjurman/vim-nc'
+Plug 'vim-scripts/closeb'
+Plug 'justinmk/vim-ipmotion'
 "Forked from jiagmiao but only activates with whitespace to right
-Plugin 'optroot/auto-pairs.git'
-Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'Konfekt/FastFold'
-"Plugin 'lervag/vimtex'
-"Plugin 'jeetsukumaran/vim-markology'
+"Plug 'optroot/auto-pairs.git'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'Konfekt/FastFold'
+"Plug 'lervag/vimtex'
+"Plug 'jeetsukumaran/vim-markology'
+"Plug 'tpope/vim-sleuth'
+Plug 'vim-voom/VOoM'
+Plug 'qpkorr/vim-bufkill'
+Plug 'alvan/vim-closetag'
+"Plug 'chrisbra/csv.vim'
+"Plug 'justinj/vim-pico8-syntax'
+Plug 'andmatand/vim-pico8-syntax'
+Plug 'gabrielelana/vim-markdown'
+Plug 'tpope/vim-eunuch'
+" Javascript, typescript, react
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'bronson/vim-visual-star-search'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
-call vundle#end()
-filetype plugin indent on
-"to ignore plugin indent changes, instead use:
-"filtype plugin on
+call plug#end()
+
+packadd! matchit
+
+"Fix plugin problems with å character (https://github.com/jiangmiao/auto-pairs/issues/88)
+let g:AutoPairsShortcutFastWrap=''
 
 "fix vim-bookmarks stealing ma
 let g:bookmark_no_default_key_mappings = 1
 
 let g:AutoPairsOnlyBeforeClose=1
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "256 colors
 set t_Co=256
 
@@ -213,6 +226,8 @@ endif
 
 let g:platuml_executable_script="plantuml"
 
+inoremap <C-O> <ESC>O
+
 "vile compatibility stuff
 "------------------------
 noremap  <C-G> g<C-G>
@@ -242,8 +257,8 @@ map zm zz
 map Q :q<CR>
 
 "make ^N/^P work correctly
-map <C-N> :bnext<CR>
-map <C-P> :bprevious<CR>
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprevious<CR>
 
 "Make ^E go to the end of the line in insert mode
 imap <C-E> <ESC>$A
@@ -273,13 +288,13 @@ map _ :buffers<CR>:buffer<Space>
 "noremap f t
 
 "Commenting with T and t
-let NERDDefaultAlign='start'
-let NERDRemoveExtraSpaces=0
-let NERD_c_alt_style=1  "Use // instead of /* */ for c code
-let g:NERDCustomDelimiters = {
-	\ 'plaintex': { 'left': '%' },
-	\ 'tex':      { 'left': '%' }
-\ }
+"let NERDDefaultAlign='start'
+"let NERDRemoveExtraSpaces=0
+"let NERD_c_alt_style=1  "Use // instead of /* */ for c code
+"let g:NERDCustomDelimiters = {
+"	\ 'plaintex': { 'left': '%' },
+"	\ 'tex':      { 'left': '%' }
+"\ }
 "Use \cl instead
 "noremap T :call NERDComment('n', 'comment')<CR>j
 "noremap t :call NERDComment('n', 'uncomment')<CR>j
@@ -413,9 +428,19 @@ set foldlevelstart=99
 let g:SimpylFold_docstring_preview = 1
 let g:SimpylFold_fold_docstring = 0
 
+set foldtext=MyFoldText()
+function MyFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return v:folddashes . sub
+endfunction
+
 "Line wrapping for long lines
 function! WrapFunc()
 	setl wrap linebreak bri
+	set display+=lastline
+	set textwidth=0  "don't wrap
+	set wrapmargin=0 "don't wrap
 	map <buffer> j gj
 	map <buffer> k gk
 	map <buffer> $ g$
@@ -437,3 +462,62 @@ function! PythonSpaces()
 	set softtabstop=4
 endfunction
 command! PySpace call PythonSpaces()
+
+
+"COC configuration
+"" Disable ultisnips
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+

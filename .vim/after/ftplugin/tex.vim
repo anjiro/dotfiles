@@ -21,3 +21,5 @@ vmap ` c`'<ESC>hPW
 
 "Don't spell check in comments
 let g:tex_comment_nospell=1
+
+set ts=2

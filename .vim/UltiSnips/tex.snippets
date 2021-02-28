@@ -1,3 +1,6 @@
+#Override built-ins
+priority 1
+
 snippet wf "Wrapfigure environment" b
 \begin{wrapfigure}{${2:rlRL}}{${3:.4}\linewidth}
 	\vspace{-.75\baselineskip}
@@ -39,4 +42,16 @@ endsnippet
 
 snippet %%% "Begin comment" b
 \begin{comment}
+endsnippet
+
+snippet sub "Subsection"
+\subsection{${1:${VISUAL:subsection name}}}
+
+$0
+endsnippet
+
+snippet ssub "Subsubsection"
+\subsubsection{${1:${VISUAL:subsubsection name}}}
+
+$0
 endsnippet

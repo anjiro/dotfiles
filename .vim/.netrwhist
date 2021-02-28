@@ -1,7 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/private/tmp/chi18a/papers/1975'
-let g:netrw_dirhist_2='/Users/dlaics/Library/Containers/com.autodesk.mas.fusion360/Data/Library/Application Support/Autodesk/Autodesk Fusion 360/API/Scripts/Circletron3000'
-let g:netrw_dirhist_3='/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7'
-let g:netrw_dirhist_4='/private/tmp/RealtimePlotter/RealtimePlotterArduinoCode'
-let g:netrw_dirhist_5='/Users/dlaics/data/python/modules'
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/dan/Dropbox/Apps/Overleaf/2020-Villum Experiment'
+let g:netrw_dirhist_5='/Users/dan/data/python/modules'
+let g:netrw_dirhist_4='/Users/dan/data/projects/ucph/teaching/mobile/web_audio/webaudio-demo/scripts'
+let g:netrw_dirhist_3='/usr/local/etc/minecraft-server'
